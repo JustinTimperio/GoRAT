@@ -25,7 +25,7 @@ GoRat is an extremely powerful reverse shell, file server, and control plane usi
 
 # Installing and Building
 
-1. Set up a full GoLang build environment with `Make` 
+1. Set up a full GoLang build environment
 2. Install [UPX](https://upx.github.io/)
 3. Fill out the MakeFile and run `Make`
 4. Transfer the `server` folder to your "attacking" machine, install [bc](https://linux.die.net/man/1/bc) and run `./start_server.sh`
