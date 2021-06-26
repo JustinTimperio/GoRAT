@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	defaultShell = bash
+	defaultShell = shell
 	shell        = "sh"
 	bash         = "bash"
 	fish         = "fish"

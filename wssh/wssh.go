@@ -5,8 +5,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"ASS/shared"
-
+	"github.com/JustinTimperio/GoRat/shared"
 	"github.com/abiosoft/ishell"
 	"github.com/fatih/color"
 )

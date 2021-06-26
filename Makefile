@@ -2,7 +2,7 @@
 # FILL THESE IN BEFORE BUILDING
 SERVER_DEST = 000.000.000.000:1337
 # SERVER_DEST = https:\/\/yoururl.com\/sus:443
-EXE_NAME = sus
+EXE_NAME = gorat
 ############
 
 # Vars and Flags
@@ -16,17 +16,19 @@ CORE = goRat.go
 COMPILE_CORE = '$(SRC_DIR)'/goRat.go
 
 all: pre-build
-	CGO_ENABLED=0 GOOS=linux go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_linux $(LDFLAGS) $(COMPILE_CORE)
-	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_linux
-	CGO_ENABLED=0 GOOS=darwin go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_macos $(LDFLAGS) $(COMPILE_CORE)
-	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_macos
-	CGO_ENABLED=0 GOOS=windows go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_windows.exe $(LDFLAGS) $(COMPILE_CORE)
-	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_windows.exe
-	CGO_ENABLED=0 GOOS=freebsd go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_freebsd $(LDFLAGS) $(COMPILE_CORE)
+	CGO_ENABLED=0 GOOS=linux go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_linux_x86 $(LDFLAGS) $(COMPILE_CORE)
+	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_linux_x86
+	CGO_ENABLED=0 GOOS=darwin go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_macos_x86 $(LDFLAGS) $(COMPILE_CORE)
+	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_macos_x86
+	CGO_ENABLED=0 GOOS=windows go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_windows_x86.exe $(LDFLAGS) $(COMPILE_CORE)
+	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_windows_x86.exe
+	CGO_ENABLED=0 GOOS=freebsd go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_freebsd_x86 $(LDFLAGS) $(COMPILE_CORE)
 	# RIP no UPX for freebsd
+	CGO_ENABLED=0 GOOS=openbsd go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_openbsd_x86 $(LDFLAGS) $(COMPILE_CORE)
+	# RIP no UPX for openbsd
 	
-	CGO_ENABLED=0 GOOS=linux GOARCH=mips go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_mips $(LDFLAGS) $(COMPILE_CORE)
-	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_mips
+	CGO_ENABLED=0 GOOS=linux GOARCH=mips go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_linux_mips $(LDFLAGS) $(COMPILE_CORE)
+	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_linux_mips
 	
 	GOOS=linux GOARCH=arm GOARM=5 go build -o $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_arm_ARM5 $(LDFLAGS) $(COMPILE_CORE)
 	upx $(BUILD_DIR)/$(EXE_NAME)_v$(VERSION)_arm_ARM5

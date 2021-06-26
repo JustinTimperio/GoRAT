@@ -10,7 +10,7 @@
  ::: ::::  ::::: ::  ::   :::  ::   :::     ::    
  :: :: :    : :  :    :   : :   :   : :     :     
 ```
-GoRat is an extremely powerful reverse shell, file server, and control plane using HTTPS reverse tunnels as a transport mechanism. (GoRat is not anonymous and designed for CTF players, Go enthusiasts, and security experts.)
+GoRat is an extremely powerful yet simple reverse shell, file server, and control plane using HTTPS reverse tunnels as a transport mechanism. (GoRat is not anonymous and designed for CTF players, Go enthusiasts, and security experts.)
 ### Officially Supported:
 
 | Distro/Arch Combos  | 
@@ -20,6 +20,7 @@ GoRat is an extremely powerful reverse shell, file server, and control plane usi
 | Linux Arm           | 
 | Linux Arm64         |
 | FreeBSD x86         |
+| OpenBSD x86         |
 | MacOS x86           |
 | Windows x86 (kinda) |
 
@@ -49,7 +50,7 @@ Session #1 | Control Server Mounted On: 46851
 # Payload Usage
 As with many Go binaries, client executables require zero configure and simply need to be executed. In its current state goRat does not include any methods of persistence so if you would like to make it a service, you will need to do so by your own methods.
 
-## SSH Server (Linux, FreeBSD, Darwin)
+## SSH Server (Linux, FreeBSD, Darwin, OpenBSD)
 Using the logs we can connect to clients directly via ssh using our standard unix OpenSSH package.
 ```
 ssh localhost -p ####
@@ -58,7 +59,7 @@ ssh localhost -p ####
 ## WSSH Windows (The Problem Child)
 *WARNING THE WINDOWS SHELL IS TERRIBLE, THIS WAS JUST AN EXPERIMENT*
 
-Please check out the thread: https://github.com/creack/pty/pull/109#issuecomment-864673714
+Please check out this thread: https://github.com/creack/pty/pull/109#issuecomment-864673714
 
 When connecting to Windows hosts the following command will not work as goRat does not have a Windows PTY. For Windows systems we connect using a custom wrapper written for GoRat.
 
@@ -72,8 +73,9 @@ go build wssh.go
 The control server is a simple http mechanism that translates `/some-page` to internal go commands. In this way, requesting a webpage results directly in the execution of code on a client system. While this mechanism is not very sophisticated, it is extremely reliable and performant. The api current has the following commands:
 
 1. `http://localhost:port/` - Returns a status code of `OK` if the host is online and responding to requests
-2. `http://localhost:port/stop` - Closes the client payload WITHOUT self-destruction
-3. `http://localhost:port/uninstall` - Terminates the client payload AND self-destructs
+2. `http://localhost:port/hardware` - Reports basic hardware survey of device in json 
+3. `http://localhost:port/stop` - Closes the client payload WITHOUT self-destruction
+4. `http://localhost:port/uninstall` - Terminates the client payload AND self-destructs
 
 ## File Server
 Each client's file server can be accessed on the same port as the control server. The file server is, from a technical standpoint, directly part of Control Server. Files and directories can be accessed at `http://localhost:####/fs/` through your browser or tools like `wget` and `curl`.
