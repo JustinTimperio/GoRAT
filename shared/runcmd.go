@@ -30,6 +30,10 @@ func RunCmd(cmd string, powershell bool) ([]byte, error) {
 		osshell = "/bin/sh"
 		osshellargs = []string{"-c", cmd}
 
+	case "netbsd":
+		osshell = "/bin/sh"
+		osshellargs = []string{"-c", cmd}
+
 	case "windows":
 		if powershell {
 			osshell = "powershell"

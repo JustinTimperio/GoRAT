@@ -1,9 +1,9 @@
 #!/bin/bash
 last_port=0
 
-base="/tmp/goRat"
-s_ports="/tmp/goRat/SSH_Ports"
-c_ports="/tmp/goRat/Control_Ports"
+base="/tmp/goRAT"
+s_ports="/tmp/goRAT/SSH_Ports"
+c_ports="/tmp/goRAT/Control_Ports"
 rm -rf $base
 
 mkdir -p $base
@@ -15,9 +15,6 @@ echo "Chisel Server Listening on 0.0.0.0:1337"
 
 while read -r line
   do
-    # tput setaf 1
-    # tput sgr0
-    # echo "STDOUT: $line"
     if echo "$line" | grep -q "Listening"; then
             if echo "$line" | grep -q "session"; then
                     port=$(echo "$line" | grep "Listening" | cut -d':' -f 7 | cut -d'=' -f 1)

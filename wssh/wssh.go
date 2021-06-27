@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/JustinTimperio/GoRat/shared"
+	"github.com/JustinTimperio/GoRAT/shared"
 	"github.com/abiosoft/ishell"
 	"github.com/fatih/color"
 )

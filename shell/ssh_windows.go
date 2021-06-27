@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/JustinTimperio/GoRat/shared"
+	"github.com/JustinTimperio/GoRAT/shared"
 	"github.com/gliderlabs/ssh"
 )
 

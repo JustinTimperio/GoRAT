@@ -1,4 +1,4 @@
-module github.com/JustinTimperio/GoRat
+module github.com/JustinTimperio/GoRAT
 
 go 1.16
 

