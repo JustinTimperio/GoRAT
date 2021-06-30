@@ -13,11 +13,13 @@ import (
 	"github.com/gliderlabs/ssh"
 )
 
-// SSHServer
+// SSHServer starts a gliderlabs ssh server on a port
+// A small micro API process commands and passes them to back and forth
+// This is bad and should not be used
 func SSHServer(BasePort int) {
 	Port := strconv.Itoa(BasePort + 0)
 	forwardHandler := &ssh.ForwardedTCPHandler{}
-	log.Println("starting ssh server on port " + Port + "...")
+	log.Println("Starting SSH server on port " + Port + "...")
 
 	server := ssh.Server{
 		LocalPortForwardingCallback: ssh.LocalPortForwardingCallback(func(ctx ssh.Context, dhost string, dport uint32) bool {
@@ -64,7 +66,7 @@ func SSHServer(BasePort int) {
 		}),
 
 		ReversePortForwardingCallback: ssh.ReversePortForwardingCallback(func(ctx ssh.Context, host string, port uint32) bool {
-			log.Println("Attempt to Bind", host, port, "Granted")
+			log.Println("Attempt to bind", host, port, "granted")
 			return true
 		}),
 

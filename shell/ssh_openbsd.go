@@ -22,10 +22,11 @@ var (
 	zsh          = "zsh"
 )
 
-// SSHServer
+// SSHServer starts a gliderlabs ssh server on a port and attachs to the PTY
+// IO is copied in and out via the ssh server from `stdin` and `stdout`
 func SSHServer(BasePort int) {
 	Port := strconv.Itoa(BasePort + 0)
-	log.Println("starting ssh server on port " + Port + "...")
+	log.Println("Starting SSH server on port " + Port + "...")
 
 	forwardHandler := &ssh.ForwardedTCPHandler{}
 
@@ -65,7 +66,7 @@ func SSHServer(BasePort int) {
 			}
 		}),
 		ReversePortForwardingCallback: ssh.ReversePortForwardingCallback(func(ctx ssh.Context, host string, port uint32) bool {
-			log.Println("attempt to bind", host, port, "granted")
+			log.Println("Attempt to bind", host, port, "granted")
 			return true
 		}),
 		RequestHandlers: map[string]ssh.RequestHandler{

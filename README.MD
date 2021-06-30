@@ -10,6 +10,11 @@
  ::: ::::  ::::: ::  ::   :::  ::   :::     ::    
  :: :: :    : :  :    :   : :   :   : :     :     
 ```
+![GitHub](https://img.shields.io/github/license/JustinTimperio/GoRAT)
+[![Go Reference](https://pkg.go.dev/badge/github.com/JustinTimperio/gomap.svg)](https://pkg.go.dev/github.com/JustinTimperio/gomap)
+![Go Report Card](https://goreportcard.com/badge/github.com/JustinTimperio/GoRAT)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d343e4d027164076a630448e3102fbf7)](https://www.codacy.com/gh/JustinTimperio/GoRAT/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JustinTimperio/GoRAT&amp;utm_campaign=Badge_Grade)
+
 GoRAT(Go Remote Access Tool) is an extremely powerful yet simple reverse shell, file server, and control plane using HTTPS reverse tunnels as a transport mechanism. (GoRAT is not anonymous and designed for CTF players, Go enthusiasts, and security experts.)
 ### Supported Distros:
 
