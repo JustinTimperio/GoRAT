@@ -11,7 +11,7 @@
  :: :: :    : :  :    :   : :   :   : :     :     
 ```
 ![GitHub](https://img.shields.io/github/license/JustinTimperio/GoRAT)
-[![Go Reference](https://pkg.go.dev/badge/github.com/JustinTimperio/gomap.svg)](https://pkg.go.dev/github.com/JustinTimperio/gomap)
+[![Go Reference](https://pkg.go.dev/badge/github.com/JustinTimperio/GoRAT.svg)](https://pkg.go.dev/github.com/JustinTimperio/GoRAT)
 ![Go Report Card](https://goreportcard.com/badge/github.com/JustinTimperio/GoRAT)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d343e4d027164076a630448e3102fbf7)](https://www.codacy.com/gh/JustinTimperio/GoRAT/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JustinTimperio/GoRAT&amp;utm_campaign=Badge_Grade)
 
@@ -33,8 +33,8 @@ GoRAT(Go Remote Access Tool) is an extremely powerful yet simple reverse shell, 
 # Installing and Building
 
 1. Set up a full GoLang build environment
-2. Install [UPX](https://upx.github.io/)
-3. Fill out the MakeFile and run `Make`
+2. Install [UPX](https://upx.github.io/) and run `go install mvdan.cc/garble`
+3. Fill out `config.sh` and run `./build_payload.sh`
 4. Transfer the `server` folder to your "attacking" machine, install [bc](https://linux.die.net/man/1/bc) and run `./start_server.sh`
 5. Exploit your system and run the binary
 6. Connect to the "target" via normal ssh from the "attacking" machine
@@ -55,6 +55,8 @@ Session #1 | Control Server Mounted On: 46851
 
 # Payload Usage
 As with many Go binaries, client executables require zero configure and simply need to be executed. In its current state GoRAT does not include any methods of persistence so if you would like to make it a service, you will need to do so by your own methods.
+
+The payload also uses [garble](https://github.com/burrowers/garble) to produce a binary that works as well as a regular build, but has as little information about the original source code as possible.
 
 ## SSH Server (Linux, FreeBSD, Darwin, OpenBSD)
 Using the logs we can connect to clients directly via ssh using our standard unix OpenSSH package.

@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"reflect"
 	"runtime"
 	"strconv"
 	"time"
@@ -20,6 +21,9 @@ import (
 var (
 	endpoint_url = "@ENDPOINT_HERE@"
 )
+
+// Never obfuscate the Message type.
+var _ = reflect.TypeOf(hardware{})
 
 type hardware struct {
 	Runtime   string

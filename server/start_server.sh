@@ -1,11 +1,11 @@
 #!/bin/bash
-last_port=0
 
 base="/tmp/goRAT"
 s_ports="/tmp/goRAT/SSH_Ports"
 c_ports="/tmp/goRAT/Control_Ports"
-rm -rf $base
+last_port=0
 
+rm -rf $base
 mkdir -p $base
 touch $s_ports
 touch $c_ports

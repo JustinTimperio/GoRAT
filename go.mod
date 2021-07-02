@@ -16,4 +16,8 @@ require (
 	github.com/jaypipes/ghw v0.8.0
 	github.com/jpillora/chisel v1.7.6
 	github.com/stretchr/testify v1.7.0 // indirect
+	golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4 // indirect
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	golang.org/x/sys v0.0.0-20210403161142-5e06dd20ab57 // indirect
+	mvdan.cc/garble v0.3.0 // indirect
 )
