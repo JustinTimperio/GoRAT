@@ -34,8 +34,8 @@ GoRAT(Go Remote Access Tool) is an extremely powerful yet simple reverse shell, 
 
 1. Set up a full GoLang build environment
 2. Install [UPX](https://upx.github.io/) and run `go install mvdan.cc/garble`
-3. Fill out `config.sh` and run `./build_payload.sh`
-4. Transfer the `server` folder to your "attacking" machine, install [bc](https://linux.die.net/man/1/bc) and run `./start_server.sh`
+3. Fill out `config.sh` and run `./build_payload.sh --garble`
+4. Transfer the `BUILD` folder to your "attacking" machine, install [bc](https://linux.die.net/man/1/bc) and run `./start_server.sh`
 5. Exploit your system and run the binary
 6. Connect to the "target" via normal ssh from the "attacking" machine
 
