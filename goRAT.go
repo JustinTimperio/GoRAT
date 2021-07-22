@@ -22,7 +22,7 @@ var (
 	endpoint_url = "@ENDPOINT_HERE@"
 )
 
-// Never obfuscate the Message type.
+// Never obfuscate the Structs.
 var _ = reflect.TypeOf(hardware{})
 
 type hardware struct {
