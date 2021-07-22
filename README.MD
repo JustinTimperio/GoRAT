@@ -47,10 +47,15 @@ GoRAT uses the standard release binaries provided by the [chisel project](https:
 
 As clients connect you will see a log like this. We will use this log to access each clients SSH Server, HTTP File Server, and HTTP Control Server.
 ```
-[mr.robot@localhost ~]$ ./start_server.sh 
-Chisel Server Listening on 0.0.0.0:1337
-Session #1 | SSH Server Mounted On: 46850
-Session #1 | Control Server Mounted On: 46851
+mr.robot@localhost:~# ./start_server.sh 
+Starting Chisel Server on Port 1337
+=============================================
+Session #1 | Control Server Mounted On: 27818
+Session #1 | SSH Server Mounted On: 27819
+=============================================
+Session #2 | Control Server Mounted On: 33132
+Session #2 | SSH Server Mounted On: 33133
+
 ```
 
 # Payload Usage

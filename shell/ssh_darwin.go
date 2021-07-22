@@ -23,7 +23,7 @@ var (
 // SSHServer starts a gliderlabs ssh server on a port and attachs to the PTY
 // IO is copied in and out via the ssh server from `stdin` and `stdout`
 func SSHServer(BasePort int) {
-	Port := strconv.Itoa(BasePort + 0)
+	Port := strconv.Itoa(BasePort + 1)
 	log.Println("Starting SSH server on port " + Port + "...")
 
 	forwardHandler := &ssh.ForwardedTCPHandler{}

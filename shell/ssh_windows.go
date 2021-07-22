@@ -17,7 +17,7 @@ import (
 // A small micro API process commands and passes them to back and forth
 // This is bad and should not be used
 func SSHServer(BasePort int) {
-	Port := strconv.Itoa(BasePort + 0)
+	Port := strconv.Itoa(BasePort + 1)
 	forwardHandler := &ssh.ForwardedTCPHandler{}
 	log.Println("Starting SSH server on port " + Port + "...")
 
