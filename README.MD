@@ -18,27 +18,35 @@
 GoRAT(Go Remote Access Tool) is an extremely powerful yet simple reverse shell, file server, and control plane using HTTPS reverse tunnels as a transport mechanism. (GoRAT is not anonymous and designed for CTF players, Go enthusiasts, and security experts.)
 ### Supported Distros:
 
-| 64Bit Distros       | 32Bit Distros       |
-|---------------------|---------------------|
-| Linux               | Linux               | 
-| FreeBSD             | FreeBSD             |
-| OpenBSD             | OpenBSD             |
-| Linux ARM           | Linux ARM           | 
-| FreeBSD ARM         | FreeBSD ARM         |
-| OpenBSD ARM         | OpenBSD ARM         |
-| Linux MIPS          | Linux MIPS          |
-| MacOS               | Windows (kinda)     |
-| Windows (kinda)     |                     |
+| 64Bit Distros       | 32Bit Distros                 |
+|---------------------|-------------------------------|
+| Linux               | Linux                         |
+| FreeBSD             | FreeBSD                       |
+| OpenBSD             | OpenBSD                       |
+| Linux ARM           | Linux ARM                     |
+| FreeBSD ARM         | FreeBSD ARM                   |
+| OpenBSD ARM         | OpenBSD ARM                   |
+| Linux MIPS          | Linux MIPS                    |
+| MacOS               | (NOT BUILDING) MacOS          |
+| Android ARM         | (NOT BUILDING) Android ARM    |
+| Windows (kinda)     | Windows (kinda)               |
 
-# Installing and Building
-
+# Installing and Building Native
 1. Set up a full GoLang build environment
-2. Install [UPX](https://upx.github.io/) and run `go install mvdan.cc/garble`
-3. Fill out `config.sh` and run `./build_payload.sh --garble`
-4. Transfer the `BUILD` folder to your "attacking" machine, install [bc](https://linux.die.net/man/1/bc) and run `./start_server.sh`
-5. Exploit your system and run the binary
-6. Connect to the "target" via normal ssh from the "attacking" machine
+2. Install [UPX](https://upx.github.io/) 
+3. Install [Garble](https://github.com/burrowers/garble) with `go get mvdan.cc/garble`
+4. Fill out `config.sh`
+5. Run `./build_payload.sh --all`
 
+# Installing and Building with Docker
+1. Install and start docker
+2. Fill out `config.sh` 
+3. Run `./build_payload.sh --docker`
+
+# Using the Payloads
+1. Transfer the `BUILD` folder to your "attacking" machine, install [bc](https://linux.die.net/man/1/bc) and run `./start_server.sh`
+2. Exploit your system and run the binary
+3. Connect to the "target" via normal ssh from the "attacking" machine
 
 # Chisel Server Usage
 GoRAT uses the standard release binaries provided by the [chisel project](https://github.com/jpillora/chisel/releases). The server requires a number of configure options and has fairly verbose logging. For this reason a small shell script is provided to start and parse the output of chisel for easy use. To use it, run the following:
@@ -55,7 +63,6 @@ Session #1 | SSH Server Mounted On: 27819
 =============================================
 Session #2 | Control Server Mounted On: 33132
 Session #2 | SSH Server Mounted On: 33133
-
 ```
 
 # Payload Usage
