@@ -9,5 +9,5 @@ COPY . .
 
 # Build Payload
 RUN go mod download -x
-RUN go get mvdan.cc/garble@latest
+RUN go get mvdan.cc/garble@v0.3.0
 RUN ./build_payload.sh -a
